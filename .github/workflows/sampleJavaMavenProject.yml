@@ -42,7 +42,7 @@ jobs:
         run: ./mvnw -f github-actions-java-maven/pom.xml -B verify
 
       - name: Upload Maven build artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: artifact.jar
           path: github-actions-java-maven/target/github-actions-java-maven.jar
@@ -55,7 +55,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Download Maven build artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: artifact.jar
           path: github-actions-java-maven/target
