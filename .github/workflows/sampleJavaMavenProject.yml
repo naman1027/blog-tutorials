@@ -1,6 +1,6 @@
 name: Maven GitHub Actions Sample
 
-on: [push]
+on: [workflow_dispatch]
 
 jobs:
   compile:
