@@ -60,17 +60,19 @@ jobs:
           name: artifact.jar
           path: github-actions-java-maven/target
 
+      - name: 'Login to GitHub Container Registry'
+        uses: docker/login-action@v1
+        with:
+            registry: ghcr.io
+            username: ${{github.actor}}
+            password: ${{secrets.GITHUB_TOKEN}}
+
       - name: Build Docker container
         working-directory: github-actions-java-maven
         run: |
-          docker build -t de.rieckpil.blog/github-actions-sample .
-      - name: Access secrets
-        env:
-          SUPER_SECRET: ${{ secrets.SUPER_SECRET }}
-        run: echo "Content of secret - $SUPER_SECRET"
+          docker build -t ghcr.io/naman1027/sampletest:latest .
 
       - name: Push Docker images
-        run: echo "Pushing Docker image to Container Registry (e.g. ECR)"
-
-      - name: Deploy application
-        run: echo "Deploying application (e.g. Kubernetes)"
+        run: |
+          echo "Pushing Docker image to Container Registry (e.g. ECR)"
+          docker push ghcr.io/naman1027/sampletest:latest
